@@ -1687,6 +1687,7 @@ nav a:hover::after {
 
   .btn-header {
     padding: 12px;
+    margin-left: auto;
   }
 
   .logo-sub {
