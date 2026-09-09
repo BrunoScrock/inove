@@ -1252,6 +1252,8 @@ nav a:hover::after {
   text-align: center;
   box-shadow: var(--shadow);
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 .contato-card:hover {
@@ -1269,6 +1271,11 @@ nav a:hover::after {
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
+}
+
+.contato-card-icon svg {
+  width: 28px;
+  height: 28px;
 }
 
 .contato-card h3 {
@@ -1293,8 +1300,15 @@ nav a:hover::after {
   font-size: 0.88rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   transition: all 0.3s;
+  margin-top: auto;
+}
+
+.btn-contato svg {
+  width: 18px;
+  height: 18px;
 }
 
 .btn-contato:hover {
@@ -1469,6 +1483,11 @@ nav a:hover::after {
   align-items: center;
   justify-content: center;
   transition: all 0.3s;
+}
+
+.social-link svg {
+  width: 22px;
+  height: 22px;
 }
 
 .social-link:hover {

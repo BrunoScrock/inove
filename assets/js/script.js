@@ -106,11 +106,11 @@ const GALERIA = [
   { categoria: "Suspensão", titulo: "Manutenção de Suspensão", imagem: "assets/images/galeria/suspensao-01.jpg", placeholder: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=800&q=80" },
   { categoria: "Motor", titulo: "Manutenção de Motor", imagem: "assets/images/galeria/motor-01.jpg", placeholder: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80" },
   { categoria: "Elétrica", titulo: "Serviço Elétrico", imagem: "assets/images/galeria/eletrica-01.jpg", placeholder: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80" },
-  { categoria: "Ar-Condicionado", titulo: "Manutenção de Ar-Condicionado", imagem: "assets/images/galeria/arcondicionado-01.jpg", placeholder: "https://images.unsplash.com/photo-1555963967-582e635b4f8c?auto=format&fit=crop&w=800&q=80" },
+  { categoria: "Ar-Condicionado", titulo: "Manutenção de Ar-Condicionado", imagem: "assets/images/galeria/arcondicionado-01.jpg", placeholder: "https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?auto=format&fit=crop&w=800&q=80" },
   { categoria: "Diagnóstico", titulo: "Scanner Automotivo", imagem: "assets/images/galeria/diagnostico-02.jpg", placeholder: "https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=800&q=80" },
   { categoria: "Oficina", titulo: "Nossa Oficina - Interior", imagem: "assets/images/galeria/oficina-01.jpg", placeholder: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80" },
-  { categoria: "Oficina", titulo: "Nossa Oficina - Elevadores", imagem: "assets/images/galeria/oficina-02.jpg", placeholder: "https://images.unsplash.com/photo-1632823475157-1fcfd82e1c58?auto=format&fit=crop&w=800&q=80" },
-  { categoria: "Mecânica", titulo: "Manutenção de Freios", imagem: "assets/images/galeria/mecanica-02.jpg", placeholder: "https://images.unsplash.com/photo-1592202737890-634520a81992?auto=format&fit=crop&w=800&q=80" },
+  { categoria: "Oficina", titulo: "Nossa Oficina - Elevadores", imagem: "assets/images/galeria/oficina-02.jpg", placeholder: "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80" },
+  { categoria: "Mecânica", titulo: "Manutenção de Freios", imagem: "assets/images/galeria/mecanica-02.jpg", placeholder: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80" },
   { categoria: "Motor", titulo: "Reparo em Motor", imagem: "assets/images/galeria/motor-02.jpg", placeholder: "https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=800&q=80" }
 ];
 
