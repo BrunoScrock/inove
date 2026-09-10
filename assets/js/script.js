@@ -774,20 +774,54 @@ function setupHeaderScroll() {
 }
 
 /* ==========================================================================
-   ANIMAÇÕES DE SCROLL
+   ANIMAÇÕES DE ENTRADA (REVEAL AO ROLAR)
    ========================================================================== */
 
 function setupScrollAnimations() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
+  const seletores = [
+    ".section-title",
+    ".pillars-grid > *",
+    ".services-grid > *",
+    ".prices-grid > *",
+    ".pre-diagnostico-wrapper",
+    ".sobre-grid > *",
+    ".sobre-features > *",
+    ".coverflow",
+    ".reviews-grid > *",
+    ".contato-grid > *",
+    ".map-wrapper",
+    ".footer-content > *"
+  ];
 
-  document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+  const alvos = document.querySelectorAll(seletores.join(","));
+  if (!alvos.length || !("IntersectionObserver" in window)) return;
+
+  alvos.forEach((el) => {
+    el.classList.add("reveal");
+    // Atraso escalonado suave entre os itens da mesma linha
+    const indice = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.style.transitionDelay = `${(indice % 6) * 0.08}s`;
+  });
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("visible");
+          observador.unobserve(entrada.target);
+          // Após o fim da entrada escalonada, zera o atraso para não
+          // prejudicar os hovers (instantâneo).
+          const atraso = parseFloat(entrada.target.style.transitionDelay || 0);
+          setTimeout(() => {
+            entrada.target.style.transitionDelay = "0s";
+          }, atraso * 1000 + 750);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  alvos.forEach((el) => observador.observe(el));
 }
 
 /* ==========================================================================
