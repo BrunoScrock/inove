@@ -254,15 +254,22 @@ function montarCoverflow() {
       abrirLightbox(i);
     });
 
-    // Centraliza ao passar o mouse, com trava para evitar o vaivém
+    // Navega uma foto por vez ao passar o mouse (com trava para evitar o vaivém)
     card.addEventListener("mouseenter", () => {
       if (hoverLock) return;
-      if (indiceAtual(i) !== 0) {
+      const d = indiceAtual(i);
+      if (d === 1) {
         hoverLock = true;
         setTimeout(() => {
           hoverLock = false;
         }, 850);
-        irPara(i);
+        proximo();
+      } else if (d === -1) {
+        hoverLock = true;
+        setTimeout(() => {
+          hoverLock = false;
+        }, 850);
+        anterior();
       }
     });
 

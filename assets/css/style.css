@@ -2051,8 +2051,17 @@ body.no-scroll {
     margin-left: auto;
   }
 
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-name {
+    font-size: 1.1rem;
+  }
+
   .logo-sub {
-    display: none;
+    font-size: 0.58rem;
   }
 
   .hero {
