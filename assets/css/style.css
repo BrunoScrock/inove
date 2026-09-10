@@ -580,17 +580,18 @@ nav a:hover::after {
 
 .price-card {
   background: rgba(255, 255, 255, 0.04);
-  border: 2px solid var(--accent);
+  border-top: 4px solid var(--accent);
   border-radius: var(--radius);
   padding: 28px;
   backdrop-filter: blur(6px);
-  transition: transform 0.3s, border-color 0.3s;
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.25);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
 .price-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.25);
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.35);
 }
 
 .price-card-header {
