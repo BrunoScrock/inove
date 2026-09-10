@@ -190,28 +190,390 @@ function renderPrecos() {
   `).join("");
 }
 
-// Galeria
-function renderGaleria() {
-  const grid = document.getElementById("galleryGrid");
-  grid.innerHTML = GALERIA.map((item, i) => `
-    <div class="gallery-item fade-up" data-categoria="${item.categoria}" style="animation-delay: ${i * 0.03}s;">
-      <span class="gallery-category">${item.categoria}</span>
-      <img src="${item.imagem}" data-placeholder="${item.placeholder || ''}" alt="${item.titulo}" loading="lazy">
-      <div class="gallery-overlay">
-        <span>${item.titulo}</span>
-      </div>
-    </div>
-  `).join("");
+// Galeria — coverflow 3D
+function montarCoverflow() {
+  const stage = document.getElementById("coverflow-stage");
+  if (!stage) return;
 
-  // Se a foto local ainda não existir, usa a imagem placeholder automaticamente
-  grid.querySelectorAll("img[data-placeholder]").forEach(img => {
-    img.addEventListener("error", () => {
-      if (img.dataset.placeholder) {
-        img.src = img.dataset.placeholder;
-        img.removeAttribute("data-placeholder");
+  const ambBg = document.getElementById("coverflow-bg");
+  const dotsContainer = document.getElementById("coverflow-dots");
+  const btnPrev = document.getElementById("coverflow-prev");
+  const btnNext = document.getElementById("coverflow-next");
+
+  const itens = GALERIA || [];
+  if (!itens.length) return;
+
+  let indice = 0;
+  let touchX = 0;
+  let hoverLock = false;
+
+  function orcamentoDaGaleria(assunto) {
+    const msg = `Olá! Vi "${assunto}" na galeria do site e gostaria de solicitar um orçamento.`;
+    window.open(buildWhatsAppUrl(msg), "_blank");
+  }
+
+  // Cria os cartões
+  itens.forEach((item, i) => {
+    const card = document.createElement("div");
+    card.className = "coverflow-card";
+    card.dataset.index = i;
+    card.setAttribute("role", "tabpanel");
+
+    const img = document.createElement("img");
+    img.src = item.imagem;
+    img.alt = item.titulo;
+    img.loading = "lazy";
+    img.draggable = false;
+    // Usa a imagem placeholder automaticamente se a foto local não existir
+    if (item.placeholder) {
+      img.addEventListener("error", () => {
+        if (img.src !== item.placeholder) {
+          img.src = item.placeholder;
+          img.alt = item.titulo;
+        }
+      }, { once: true });
+    }
+    card.appendChild(img);
+
+    const vignette = document.createElement("div");
+    vignette.className = "coverflow-vignette";
+    card.appendChild(vignette);
+
+    const content = document.createElement("div");
+    content.className = "coverflow-content";
+    content.innerHTML =
+      '<span class="coverflow-tag">' + (item.categoria || "Inove") + "</span>" +
+      '<div class="coverflow-body">' +
+      '<h3 class="coverflow-title">' + item.titulo + "</h3>" +
+      (item.descricao ? '<p class="coverflow-desc">' + item.descricao + "</p>" : "") +
+      '<button class="coverflow-cta">Solicitar Orçamento</button>' +
+      "</div>";
+    card.appendChild(content);
+
+    card.addEventListener("click", () => {
+      abrirLightbox(i);
+    });
+
+    // Centraliza ao passar o mouse, com trava para evitar o vaivém
+    card.addEventListener("mouseenter", () => {
+      if (hoverLock) return;
+      if (indiceAtual(i) !== 0) {
+        hoverLock = true;
+        setTimeout(() => {
+          hoverLock = false;
+        }, 850);
+        irPara(i);
       }
     });
+
+    content.querySelector(".coverflow-cta").addEventListener("click", (e) => {
+      e.stopPropagation();
+      orcamentoDaGaleria(item.categoria || item.titulo);
+    });
+
+    stage.appendChild(card);
   });
+
+  const cards = Array.from(stage.children);
+
+  // Dots de paginação
+  itens.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "coverflow-dot";
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", "Ir para foto " + (i + 1));
+    dot.addEventListener("click", () => irPara(i));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = Array.from(dotsContainer.children);
+
+  function indiceAtual(i) {
+    let d = (i - indice + itens.length) % itens.length;
+    if (d > itens.length / 2) d -= itens.length;
+    return d;
+  }
+
+  function atualizar() {
+    const cardW = cards[0].offsetWidth || 310;
+    const deslocamento = (fator, sinal) => Math.round(fator * cardW) * sinal;
+
+    cards.forEach((card, i) => {
+      const d = indiceAtual(i);
+      const sinal = d < 0 ? -1 : 1;
+      const abs = Math.abs(d);
+      let transformo = "";
+      let opacidade = 0;
+      let z = 1;
+      let filtro = "brightness(0.4) blur(2px)";
+      let centro = false;
+
+      if (d === 0) {
+        transformo = "none";
+        opacidade = 1;
+        z = 30;
+        filtro = "none";
+        centro = true;
+      } else if (abs === 1) {
+        transformo =
+          "translateX(" + deslocamento(0.62, sinal) + "px) scale(0.84) rotateY(" + -24 * sinal + "deg)";
+        opacidade = 0.6;
+        z = 20;
+        filtro = "brightness(0.75)";
+      } else if (abs === 2) {
+        transformo =
+          "translateX(" + deslocamento(1.05, sinal) + "px) scale(0.68) rotateY(" + -38 * sinal + "deg)";
+        opacidade = 0.35;
+        z = 10;
+        filtro = "brightness(0.55) blur(1px)";
+      } else {
+        transformo =
+          "translateX(" + deslocamento(1.35, sinal) + "px) scale(0.55) rotateY(" + -45 * sinal + "deg)";
+        opacidade = 0;
+      }
+
+      card.style.transform = transformo;
+      card.style.opacity = opacidade;
+      card.style.zIndex = z;
+      card.style.filter = filtro;
+      card.setAttribute("aria-hidden", centro ? "false" : "true");
+      card.classList.toggle("is-center", centro);
+    });
+
+    if (ambBg) ambBg.src = itens[indice].imagem;
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === indice);
+      dot.setAttribute("aria-selected", i === indice ? "true" : "false");
+    });
+  }
+
+  function proximo() {
+    indice = (indice + 1) % itens.length;
+    atualizar();
+  }
+
+  function anterior() {
+    indice = (indice - 1 + itens.length) % itens.length;
+    atualizar();
+  }
+
+  function irPara(i) {
+    indice = (i + itens.length) % itens.length;
+    atualizar();
+  }
+
+  btnPrev.addEventListener("click", anterior);
+  btnNext.addEventListener("click", proximo);
+
+  // --------------------------------------------------------------------------
+  // LIGHTBOX — galeria de fotos (aberto ao clicar no cartão central)
+  // --------------------------------------------------------------------------
+
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Galeria de fotos da Inove");
+  overlay.innerHTML =
+    '<button class="lightbox-close" aria-label="Fechar galeria"><i data-lucide="x"></i></button>' +
+    '<div class="lightbox-counter"></div>' +
+    '<button class="lightbox-arrow prev" aria-label="Foto anterior"><i data-lucide="chevron-left"></i></button>' +
+    '<button class="lightbox-arrow next" aria-label="Próxima foto"><i data-lucide="chevron-right"></i></button>' +
+    '<figure class="lightbox-figure">' +
+    '<img class="lightbox-img" src="" alt="">' +
+    "<figcaption>" +
+    '<span class="coverflow-tag lightbox-tag"></span>' +
+    '<h3 class="lightbox-title"></h3>' +
+    '<button class="coverflow-cta lightbox-cta">Solicitar Orçamento</button>' +
+    "</figcaption>" +
+    "</figure>" +
+    '<div class="lightbox-thumbs"></div>';
+  document.body.appendChild(overlay);
+
+  let obraAtiva = 0;
+  let fotoAtiva = 0;
+
+  function fotosDaObra(item) {
+    const fotos = Array.isArray(item.imagens) && item.imagens.length ? item.imagens : [item.imagem];
+    return fotos;
+  }
+
+  function atualizarLightbox() {
+    const fotos = fotosDaObra(itens[obraAtiva]);
+    const item = itens[obraAtiva];
+    const imgEl = overlay.querySelector(".lightbox-img");
+    const counter = overlay.querySelector(".lightbox-counter");
+    const hasMulti = fotos.length > 1;
+
+    if (fotos.length) {
+      imgEl.src = fotos[fotoAtiva];
+      imgEl.alt = item.titulo + " - foto " + (fotoAtiva + 1) + " de " + fotos.length;
+    }
+
+    // Se a foto local não existir, usa a imagem placeholder
+    imgEl.onerror = null;
+    if (item.placeholder) {
+      imgEl.onerror = () => {
+        if (imgEl.src !== item.placeholder) {
+          imgEl.src = item.placeholder;
+          imgEl.alt = item.titulo;
+        }
+      };
+    }
+
+    counter.textContent = hasMulti ? fotoAtiva + 1 + " / " + fotos.length : "";
+    overlay.classList.toggle("has-single", !hasMulti);
+    overlay.querySelector(".lightbox-tag").textContent = item.categoria || "Inove";
+    overlay.querySelector(".lightbox-title").textContent = item.titulo;
+    overlay.querySelector(".lightbox-cta").onclick = () => orcamentoDaGaleria(item.categoria || item.titulo);
+
+    const thumbs = overlay.querySelector(".lightbox-thumbs");
+    thumbs.innerHTML = "";
+    if (hasMulti) {
+      fotos.forEach((src, fi) => {
+        const t = document.createElement("button");
+        t.type = "button";
+        t.className = "lightbox-thumb" + (fi === fotoAtiva ? " active" : "");
+        t.setAttribute("aria-label", "Ir para a foto " + (fi + 1));
+        const ti = document.createElement("img");
+        ti.src = src;
+        ti.alt = "";
+        ti.loading = "lazy";
+        t.appendChild(ti);
+        t.addEventListener("click", () => {
+          fotoAtiva = fi;
+          atualizarLightbox();
+        });
+        thumbs.appendChild(t);
+      });
+    }
+
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function fotoAnterior() {
+    const fotos = fotosDaObra(itens[obraAtiva]);
+    if (fotos.length <= 1) return;
+    fotoAtiva = (fotoAtiva - 1 + fotos.length) % fotos.length;
+    atualizarLightbox();
+  }
+
+  function fotoProxima() {
+    const fotos = fotosDaObra(itens[obraAtiva]);
+    if (fotos.length <= 1) return;
+    fotoAtiva = (fotoAtiva + 1) % fotos.length;
+    atualizarLightbox();
+  }
+
+  function abrirLightbox(i) {
+    obraAtiva = i;
+    fotoAtiva = 0;
+    pararAutoplay();
+    atualizarLightbox();
+    overlay.classList.add("open");
+    document.body.classList.add("no-scroll");
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function fecharLightbox() {
+    overlay.classList.remove("open");
+    document.body.classList.remove("no-scroll");
+    iniciarAutoplay();
+  }
+
+  overlay.querySelector(".lightbox-close").addEventListener("click", fecharLightbox);
+  overlay.querySelector(".lightbox-arrow.prev").addEventListener("click", (e) => {
+    e.stopPropagation();
+    fotoAnterior();
+  });
+  overlay.querySelector(".lightbox-arrow.next").addEventListener("click", (e) => {
+    e.stopPropagation();
+    fotoProxima();
+  });
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) fecharLightbox();
+  });
+
+  let lightboxTouchX = 0;
+  overlay.addEventListener("touchstart", (e) => {
+    lightboxTouchX = e.touches[0].clientX;
+  }, { passive: true });
+  overlay.addEventListener("touchend", (e) => {
+    const diff = e.changedTouches[0].clientX - lightboxTouchX;
+    if (Math.abs(diff) > 45) {
+      if (diff < 0) fotoProxima();
+      else fotoAnterior();
+    }
+  }, { passive: true });
+
+  document.addEventListener("keydown", (e) => {
+    if (!overlay.classList.contains("open")) return;
+    if (e.key === "Escape") {
+      fecharLightbox();
+      e.preventDefault();
+    } else if (e.key === "ArrowLeft") {
+      fotoAnterior();
+      e.preventDefault();
+    } else if (e.key === "ArrowRight") {
+      fotoProxima();
+      e.preventDefault();
+    }
+  });
+
+  // Navegação por teclado (setas) quando o foco está na galeria
+  stage.addEventListener("keydown", (e) => {
+    if (overlay.classList.contains("open")) return;
+    if (e.key === "ArrowLeft") {
+      anterior();
+      e.preventDefault();
+    }
+    if (e.key === "ArrowRight") {
+      proximo();
+      e.preventDefault();
+    }
+  });
+
+  // Gestos de toque (swipe)
+  stage.addEventListener("touchstart", (e) => {
+    touchX = e.touches[0].clientX;
+  }, { passive: true });
+  stage.addEventListener("touchend", (e) => {
+    const diff = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(diff) > 45) {
+      if (diff < 0) proximo();
+      else anterior();
+    }
+  }, { passive: true });
+
+  // Autoplay (pausa ao passar o mouse; desligado se o usuário prefere menos movimento)
+  const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = null;
+
+  function pararAutoplay() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function iniciarAutoplay() {
+    pararAutoplay();
+    if (reduzirMovimento || itens.length <= 1) return;
+    if (overlay.classList.contains("open")) return;
+    timer = setInterval(proximo, 5000);
+  }
+
+  const cover = document.getElementById("coverflow");
+  if (cover) {
+    cover.addEventListener("mouseenter", pararAutoplay);
+    cover.addEventListener("mouseleave", iniciarAutoplay);
+    cover.addEventListener("focusin", pararAutoplay);
+    cover.addEventListener("focusout", iniciarAutoplay);
+  }
+
+  atualizar();
+  iniciarAutoplay();
+  if (window.lucide) window.lucide.createIcons();
 }
 
 // Avaliações
@@ -358,64 +720,6 @@ function enviarPreDiagnostico() {
 }
 
 /* ==========================================================================
-   FILTROS DA GALERIA
-   ========================================================================== */
-
-function setupGalleryFilters() {
-  const buttons = document.querySelectorAll(".filter-btn");
-  const items = document.querySelectorAll(".gallery-item");
-
-  const normalize = (str) =>
-    str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-\s]/g, "");
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const filter = btn.dataset.filter;
-      items.forEach(item => {
-        const show = filter === "todos" || normalize(item.dataset.categoria) === filter;
-        item.classList.toggle("hidden", !show);
-      });
-    });
-  });
-}
-
-/* ==========================================================================
-   LIGHTBOX
-   ========================================================================== */
-
-function setupLightbox() {
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-  const closeBtn = lightbox.querySelector(".lightbox-close");
-
-  document.querySelectorAll(".gallery-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const img = item.querySelector("img");
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add("open");
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  function closeLightbox() {
-    lightbox.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-
-  closeBtn.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeLightbox();
-  });
-}
-
-/* ==========================================================================
    MENU MOBILE
    ========================================================================== */
 
@@ -508,13 +812,11 @@ function setupLogoFallback() {
 document.addEventListener("DOMContentLoaded", () => {
   renderServicos();
   renderPrecos();
-  renderGaleria();
   renderAvaliacoes();
   renderHorarios();
   setupWhatsAppLinks();
   setupMobileMenu();
-  setupGalleryFilters();
-  setupLightbox();
+  montarCoverflow();
   setupHeaderScroll();
   setupScrollAnimations();
   setupLogoFallback();

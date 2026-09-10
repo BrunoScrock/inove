@@ -9,6 +9,8 @@
   <meta name="theme-color" content="#111827">
   <meta name="author" content="Inove Mecânica">
 
+  <link rel="icon" type="image/png" href="assets/images/logo/logo-inove.png">
+
   <meta property="og:title" content="Inove Mecânica | Oficina Mecânica Automotiva">
   <meta property="og:description" content="Inove Mecânica – serviços automotivos, diagnóstico, manutenção preventiva e corretiva com transparência e qualidade.">
   <meta property="og:type" content="website">
@@ -330,20 +332,22 @@
         <p>Confira nossas instalações e serviços.</p>
       </div>
 
-      <div class="gallery-filters">
-        <button class="filter-btn active" data-filter="todos">Todos</button>
-        <button class="filter-btn" data-filter="mecanica">Mecânica</button>
-        <button class="filter-btn" data-filter="diagnostico">Diagnóstico</button>
-        <button class="filter-btn" data-filter="freios">Freios</button>
-        <button class="filter-btn" data-filter="suspensao">Suspensão</button>
-        <button class="filter-btn" data-filter="motor">Motor</button>
-        <button class="filter-btn" data-filter="eletrica">Elétrica</button>
-        <button class="filter-btn" data-filter="arcondicionado">Ar-Condicionado</button>
-        <button class="filter-btn" data-filter="oficina">Oficina</button>
-      </div>
+      <div class="coverflow" id="coverflow">
+        <div class="coverflow-ambience" aria-hidden="true">
+          <img id="coverflow-bg" src="" alt="">
+          <div class="coverflow-ambience-overlay"></div>
+        </div>
 
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- Preenchido via JS -->
+        <div class="coverflow-stage" id="coverflow-stage" aria-label="Galeria de fotos da Inove"></div>
+
+        <button class="coverflow-arrow prev" id="coverflow-prev" aria-label="Foto anterior">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        <button class="coverflow-arrow next" id="coverflow-next" aria-label="Próxima foto">
+          <i data-lucide="chevron-right"></i>
+        </button>
+
+        <div class="coverflow-dots" id="coverflow-dots" role="tablist" aria-label="Navegar entre as fotos"></div>
       </div>
     </div>
   </section>
@@ -465,12 +469,6 @@
   <a href="#" class="whatsapp-float" id="whatsappFloat" aria-label="Contato via WhatsApp">
     <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
   </a>
-
-  <!-- ======================== LIGHTBOX ======================== -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" aria-label="Fechar"><i data-lucide="x"></i></button>
-    <img src="" alt="Imagem ampliada" id="lightboxImg">
-  </div>
 
   <script src="assets/js/script.js"></script>
 </body>
