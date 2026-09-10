@@ -603,7 +603,8 @@ nav a:hover::after {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.price-card-header i {
+.price-card-header i,
+.price-card-header svg {
   color: var(--secondary);
 }
 
