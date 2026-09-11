@@ -106,7 +106,7 @@ section {
    ========================================================================== */
 
 header {
-  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.98) 60%, rgba(17, 24, 39, 0.88) 100%);
+  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.97) 55%, rgba(17, 24, 39, 0.55) 100%);
   backdrop-filter: blur(10px);
   color: var(--white);
   position: fixed;
