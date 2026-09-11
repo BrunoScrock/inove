@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Negócio | Descritivo</title>
+  <meta name="description" content="Descrição breve do site.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://seusite.com.br/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+
+  <!-- ======================== HEADER ======================== -->
+  <header id="header">
+    <div class="container header-content">
+      <a href="#" class="logo">
+        <span class="logo-mark">S</span>
+        <div class="logo-text">
+          <span class="logo-name">SEU NEGÓCIO</span>
+          <span class="logo-sub">Segmento</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#diferenciais">Diferenciais</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <a href="https://wa.me/5500000000000" class="btn-header" target="_blank" rel="noopener">
+        <i data-lucide="message-circle"></i> <span>Fale Conosco</span>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================== HERO ======================== -->
+  <section id="inicio" class="hero">
+    <div class="sparks" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-badges">
+          <div class="badge"><i data-lucide="check-circle"></i> Qualidade</div>
+          <div class="badge"><i data-lucide="check-circle"></i> Confiança</div>
+        </div>
+        <h1>Seu título principal com <span>destaque</span></h1>
+        <p>Subtítulo com o benefício principal do seu negócio, em poucas palavras.</p>
+        <div class="hero-buttons">
+          <a href="#contato" class="btn-cta-hero">Saiba mais</a>
+          <a href="#" class="btn-cta-secondary">Conhecer serviços</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="hero-image-container">
+          <img src="https://picsum.photos/800/500" alt="" class="hero-image" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== DIFERENCIAIS ======================== -->
+  <section id="diferenciais" class="section-diferenciais">
+    <div class="container">
+      <div class="section-title">
+        <h2>POR QUE ESCOLHER <span>SEU NEGÓCIO?</span></h2>
+        <p>Subtítulo da seção.</p>
+      </div>
+      <div class="grid-cards" id="diferenciaisGrid">
+        <!-- Cards injetados por app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SERVIÇOS ======================== -->
+  <section id="servicos" class="section-servicos">
+    <div class="container">
+      <div class="section-title">
+        <h2>NOSSOS <span>SERVIÇOS</span></h2>
+        <p>Subtítulo da seção.</p>
+      </div>
+      <div class="grid-cards" id="servicosGrid">
+        <!-- Cards injetados por app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SOBRE ======================== -->
+  <section id="sobre" class="section-sobre">
+    <div class="container">
+      <div class="section-title">
+        <h2>SOBRE <span>NÓS</span></h2>
+        <p>Subtítulo da seção.</p>
+      </div>
+      <div class="sobre-text">
+        <p>Texto institucional da empresa. Substitua pelos dados reais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CONTATO / CTA ======================== -->
+  <section id="contato" class="section-contato">
+    <div class="container">
+      <div class="section-title">
+        <h2>FALE <span>CONOSCO</span></h2>
+        <p>Subtítulo da seção.</p>
+      </div>
+      <div class="contato-cta">
+        <a href="https://wa.me/5500000000000" class="btn-contato" target="_blank" rel="noopener">
+          <i data-lucide="message-circle"></i> Chamar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <strong>SEU NEGÓCIO</strong>
+        <p>Segmento · Cidade/UF</p>
+      </div>
+      <p>&copy; 2026 Seu Negócio. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

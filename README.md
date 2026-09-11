@@ -4,6 +4,9 @@ Site institucional profissional para a **INOVE Mecânica Automotiva**.
 
 > 📄 Documentação técnica completa: [docs/DOCUMENTACAO.md](docs/DOCUMENTACAO.md)
 
+> ♻️ Reuse este design em novos projetos: cole o [PROMPT.md](PROMPT.md) em qualquer chat
+> ou duplique a pasta [starter/](starter/) como ponto de partida.
+
 ## Estrutura do Projeto
 
 ```
