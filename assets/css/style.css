@@ -1631,27 +1631,106 @@ nav a:hover::after {
   margin: 0 auto;
 }
 
-.map-placeholder {
-  background: linear-gradient(160deg, #1f2937, #111827);
+.map-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 900px;
+  margin: 0 auto 30px;
+}
+
+.map-address-card {
+  background: var(--bg-light);
+  border: 1px solid #e5e7eb;
   border-radius: var(--radius);
-  padding: 60px 30px;
-  text-align: center;
-  color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
-.map-placeholder p {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #e5e7eb;
+.map-address-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--secondary);
 }
 
-.map-placeholder .btn-contato {
+.map-address-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  color: var(--secondary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.map-address-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.map-address-text h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.map-address-text p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.map-address-cta .btn-contato {
+  margin-top: auto;
+  width: 100%;
   background-color: var(--accent);
 }
 
-.map-placeholder .btn-contato:hover {
+.map-address-cta .btn-contato:hover {
   background-color: var(--secondary);
+}
+
+.coverage-map {
+  position: relative;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 30px -12px rgba(17, 24, 39, 0.25);
+}
+
+.coverage-map iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+
+.coverage-link {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: var(--white);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.25s, color 0.25s;
+}
+
+.coverage-link:hover {
+  background: var(--secondary);
+  color: var(--white);
 }
 
 /* ==========================================================================
@@ -2078,6 +2157,10 @@ body.no-scroll {
 
   section {
     padding: 60px 0;
+  }
+
+  .coverage-map iframe {
+    height: 320px;
   }
 
   .btn-header span {

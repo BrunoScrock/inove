@@ -10,8 +10,8 @@ const INOVE_CONFIG = {
   whatsapp: "55XXXXXXXXXXX",
 
   telefone: "(XX) XXXXX-XXXX",
-  endereco: "ENDEREÇO DA INOVE",
-  mapsLink: "", // URL do Google Maps (opcional)
+  endereco: "Av. Anita Garibaldi, 3487 - Juvevê, Curitiba - PR, 82220-000",
+  mapsLink: "https://www.google.com/maps?q=Av.+Anita+Garibaldi,+3487,+Juvev%C3%AA,+Curitiba+-+PR,+82220-000", // URL do Google Maps (opcional)
 
   instagram: "URL_DO_INSTAGRAM", // Ex: "https://www.instagram.com/inovemecanica"
 
@@ -791,6 +791,7 @@ function setupScrollAnimations() {
     ".reviews-grid > *",
     ".contato-grid > *",
     ".contato-cards > *",
+    ".map-info",
     ".map-wrapper",
     ".footer-content > *"
   ];
