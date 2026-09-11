@@ -1,0 +1,35 @@
+# INOVE Mecânica Automotiva
+
+Site institucional da INOVE — oficina mecânica automotiva em Curitiba/PR.
+
+## Sobre
+
+Especializada em manutenção preventiva e corretiva de veículos, com diagnóstico eletrônico (scanner), atendimento transparente e orçamento sob consulta. Site one-page em HTML/CSS/JS puro publicado em https://brunoscrock.github.io/inove/.
+
+## Serviços
+
+- Mecânica Geral
+- Freios
+- Suspensão
+- Troca de Óleo
+- Injeção Eletrônica
+- Arrefecimento
+- Elétrica Automotiva
+- Ar-Condicionado
+- Diagnóstico com Scanner
+- Revisão Preventiva
+- Alinhamento e Balanceamento
+- Vistoria Pré-Compra
+
+## Contato
+
+- Endereço: Av. Anita Garibaldi, 3487 - Juvevê, Curitiba - PR, 82220-000
+- WhatsApp: https://wa.me/55XXXXXXXXXXX
+- Instagram: URL_DO_INSTAGRAM
+- Maps: https://www.google.com/maps?q=Av.+Anita+Garibaldi,+3487,+Juvev%C3%AA,+Curitiba+-+PR,+82220-000
+
+## Horário
+
+- Segunda a sexta: 08:00 - 18:00
+- Sábado: Fechado
+- Domingo: Fechado

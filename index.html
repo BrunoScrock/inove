@@ -15,6 +15,10 @@
   <meta property="og:description" content="Inove Mecânica – serviços automotivos, diagnóstico, manutenção preventiva e corretiva com transparência e qualidade.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://brunoscrock.github.io/inove/">
+  <meta property="og:image" content="https://brunoscrock.github.io/inove/assets/images/logo/logo-inove.png">
+  <link rel="canonical" href="https://brunoscrock.github.io/inove/">
+  <meta name="robots" content="index, follow">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +26,54 @@
 
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- Google Analytics 4 (substitua G-XXXXXXXXXX pelo seu Measurement ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Dados estruturados (schema.org) para SEO local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "INOVE Mecânica Automotiva",
+    "description": "Oficina mecânica automotiva com diagnóstico eletrônico, manutenção preventiva e corretiva, freios, suspensão, troca de óleo e revisão preventiva.",
+    "url": "https://brunoscrock.github.io/inove/",
+    "image": "https://brunoscrock.github.io/inove/assets/images/logo/logo-inove.png",
+    "telephone": "+55XXXXXXXXXXX",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Anita Garibaldi, 3487",
+      "addressLocality": "Curitiba",
+      "addressRegion": "PR",
+      "postalCode": "82220-000",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.3824739,
+      "longitude": -49.2618130
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/inovemecanica"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -84,7 +135,7 @@
       </div>
       <div class="hero-image-wrapper">
         <div class="hero-image-container">
-          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=800&q=80" alt="Mecânico trabalhando em veículo" class="hero-image">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=800&q=80" alt="Mecânico trabalhando em veículo" class="hero-image" fetchpriority="high">
           <div class="hero-image-badge">
             <i data-lucide="shield-check"></i>
             <div>

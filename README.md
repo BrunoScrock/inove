@@ -8,6 +8,9 @@ Site institucional profissional para a **INOVE Mecânica Automotiva**.
 inove-mecanica/
 │
 ├── index.html              # Página principal
+├── sitemap.xml             # Sitemap para o Google
+├── robots.txt              # Regras de rastreamento
+├── llms.txt                # Resumo para LLMs
 │
 ├── assets/
 │   ├── css/
