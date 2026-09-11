@@ -1447,7 +1447,22 @@ nav a:hover::after {
    ========================================================================== */
 
 .section-avaliacoes {
-  background-color: var(--white);
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f2937 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-avaliacoes .section-title h2 {
+  color: var(--white);
+}
+
+.section-avaliacoes .section-title p {
+  color: #9ca3af;
+}
+
+.section-avaliacoes .container {
+  position: relative;
+  z-index: 1;
 }
 
 .reviews-marquee {
@@ -1537,9 +1552,11 @@ nav a:hover::after {
   margin-bottom: 14px;
 }
 
-.review-stars i {
-  color: #f59e0b;
-  fill: #f59e0b;
+.review-stars i,
+.review-stars svg {
+  color: #facc15;
+  fill: #facc15;
+  stroke: #facc15;
 }
 
 .review-text {
