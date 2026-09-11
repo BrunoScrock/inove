@@ -583,28 +583,43 @@ function montarCoverflow() {
   if (window.lucide) window.lucide.createIcons();
 }
 
-// Avaliações
-function renderAvaliacoes() {
-  const grid = document.getElementById("reviewsGrid");
-  grid.innerHTML = AVALIACOES.map((a, i) => {
-    const iniciais = a.nome.trim().split(" ").map(p => p[0]).join("").slice(0, 2).toUpperCase();
-    const estrelas = Array.from({ length: 5 }, (_, j) =>
-      `<i data-lucide="star" style="${j >= a.nota ? "opacity:0.25;" : ""}"></i>`
-    ).join("");
-    return `
-      <div class="review-card fade-up" style="animation-delay: ${i * 0.1}s;">
-        <div class="review-stars">${estrelas}</div>
-        <p class="review-text">"${a.texto}"</p>
-        <div class="review-author">
-          <div class="review-avatar">${iniciais}</div>
-          <div>
-            <strong>${a.nome}</strong>
-            <span>${a.servico}</span>
-          </div>
+// Avaliações (modo marquee: 3 colunas com rolagem infinita)
+function montarCartaoAvaliacao(a) {
+  const iniciais = a.nome.trim().split(" ").map(p => p[0]).join("").slice(0, 2).toUpperCase();
+  const estrelas = Array.from({ length: 5 }, (_, j) =>
+    `<i data-lucide="star" style="${j >= a.nota ? "opacity:0.25;" : ""}"></i>`
+  ).join("");
+  return `
+    <div class="review-card">
+      <div class="review-stars">${estrelas}</div>
+      <p class="review-text">"${a.texto}"</p>
+      <div class="review-author">
+        <div class="review-avatar">${iniciais}</div>
+        <div>
+          <strong>${a.nome}</strong>
+          <span>${a.servico}</span>
         </div>
       </div>
-    `;
-  }).join("");
+    </div>
+  `;
+}
+
+function renderAvaliacoes() {
+  const columns = document.querySelectorAll(".reviews-column");
+  if (!columns.length) return;
+
+  const ordens = [
+    [0, 1, 2],
+    [1, 2, 0],
+    [2, 0, 1]
+  ];
+
+  columns.forEach((col, idx) => {
+    const set = ordens[idx % ordens.length]
+      .filter(i => AVALIACOES[i])
+      .map(i => montarCartaoAvaliacao(AVALIACOES[i]));
+    col.innerHTML = set.join("") + set.join("");
+  });
 }
 
 // Horários
@@ -818,7 +833,7 @@ function setupScrollAnimations() {
     ".sobre-grid > *",
     ".sobre-features > *",
     ".coverflow",
-    ".reviews-grid > *",
+    ".reviews-marquee",
     ".contato-grid > *",
     ".contato-cards > *",
     ".map-info",

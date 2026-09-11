@@ -1450,10 +1450,70 @@ nav a:hover::after {
   background-color: var(--white);
 }
 
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.reviews-marquee {
+  position: relative;
+  display: flex;
+  justify-content: center;
   gap: 22px;
+  height: 580px;
+  max-width: 1180px;
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+.reviews-column {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 348px;
+  max-width: 100%;
+  flex-shrink: 0;
+  animation: reviewsScroll var(--dur, 32s) linear infinite;
+}
+
+.reviews-col-1 {
+  --dur: 32s;
+}
+
+.reviews-col-2,
+.reviews-col-3 {
+  display: none;
+}
+
+.reviews-col-2 {
+  --dur: 44s;
+}
+
+.reviews-col-3 {
+  --dur: 38s;
+}
+
+.reviews-marquee:hover .reviews-column {
+  animation-play-state: paused;
+}
+
+@keyframes reviewsScroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-50% - 11px));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .reviews-col-2 {
+    display: flex;
+  }
+}
+
+@media (min-width: 1025px) {
+  .reviews-col-2,
+  .reviews-col-3 {
+    display: flex;
+  }
 }
 
 .review-card {
@@ -2293,6 +2353,10 @@ body.no-scroll {
 
   .prices-grid {
     grid-template-columns: 1fr;
+  }
+
+  .reviews-marquee {
+    height: 480px;
   }
 
   .sobre-features {
