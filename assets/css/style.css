@@ -2268,11 +2268,12 @@ body.no-scroll {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: rgba(17, 24, 39, 0.98);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(to bottom, rgba(17, 24, 39, 0.96) 0%, rgba(17, 24, 39, 0.88) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     padding: 10px 0 20px;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     max-height: calc(100vh - 80px);
     overflow-y: auto;
   }
