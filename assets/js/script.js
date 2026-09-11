@@ -728,6 +728,36 @@ function enviarPreDiagnostico() {
 }
 
 /* ==========================================================================
+   COPIAR ENDEREÇO
+   ========================================================================== */
+
+function setupCopyEndereco() {
+  const btn = document.getElementById("btnCopyEndereco");
+  if (!btn) return;
+
+  const icon = btn.querySelector("i");
+  const label = btn.querySelector(".copy-label");
+
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(INOVE_CONFIG.endereco);
+      btn.classList.add("copied");
+      if (icon) icon.setAttribute("data-lucide", "check");
+      if (label) label.textContent = "Endereço copiado!";
+      if (window.lucide) window.lucide.createIcons();
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        if (icon) icon.setAttribute("data-lucide", "copy");
+        if (label) label.textContent = "Copiar Endereço";
+        if (window.lucide) window.lucide.createIcons();
+      }, 2000);
+    } catch (e) {
+      // Clipboard indisponível — mantém o estado atual
+    }
+  });
+}
+
+/* ==========================================================================
    MENU MOBILE
    ========================================================================== */
 
@@ -860,6 +890,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHorarios();
   setupWhatsAppLinks();
   setupMobileMenu();
+  setupCopyEndereco();
   montarCoverflow();
   setupHeaderScroll();
   setupScrollAnimations();

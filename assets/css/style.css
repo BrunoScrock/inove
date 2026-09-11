@@ -1642,7 +1642,7 @@ nav a:hover::after {
 .map-address-card {
   background: var(--bg-light);
   border: 1px solid #e5e7eb;
-  border-top: 4px solid transparent;
+  border-top: 4px solid #e5e7eb;
   border-radius: var(--radius);
   padding: 22px;
   display: flex;
@@ -1697,6 +1697,23 @@ nav a:hover::after {
 
 .map-address-cta .btn-contato:hover {
   background-color: var(--secondary);
+}
+
+.map-address-card .copy-btn {
+  margin-top: auto;
+  width: 100%;
+  background-color: var(--accent);
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.map-address-card .copy-btn:hover {
+  background-color: var(--secondary);
+}
+
+.map-address-card .copy-btn.copied {
+  background-color: var(--whatsapp);
 }
 
 .coverage-map {
