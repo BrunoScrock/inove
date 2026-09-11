@@ -21,7 +21,7 @@ const INOVE_CONFIG = {
     quarta: "08:00 - 18:00",
     quinta: "08:00 - 18:00",
     sexta: "08:00 - 18:00",
-    sabado: "08:00 - 13:00",
+    sabado: "Fechado",
     domingo: "Fechado"
   }
 };

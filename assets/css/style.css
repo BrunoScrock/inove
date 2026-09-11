@@ -253,6 +253,70 @@ nav a:hover::after {
   pointer-events: none;
 }
 
+/* ==========================================================================
+   FAGULHAS DE SOLDAGEM (fundo animado do hero e dos preços)
+   ========================================================================== */
+
+.sparks {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sparks::before,
+.sparks::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+}
+
+/* Camada de fundo: fagulhas maiores e lentas */
+.sparks::before {
+  background-image:
+    radial-gradient(circle at 30px 40px, rgba(251, 191, 36, 0.30) 2px, transparent 3px),
+    radial-gradient(circle at 160px 120px, rgba(249, 115, 22, 0.22) 2px, transparent 3px),
+    radial-gradient(circle at 90px 200px, rgba(255, 255, 255, 0.14) 1px, transparent 2px),
+    radial-gradient(circle at 240px 60px, rgba(251, 191, 36, 0.18) 2px, transparent 3px),
+    radial-gradient(circle at 200px 260px, rgba(249, 115, 22, 0.16) 2px, transparent 3px);
+  background-size: 280px 280px;
+  animation: sparksUp 55s linear infinite;
+}
+
+/* Camada próxima: fagulhas menores e rápidas (profundidade) */
+.sparks::after {
+  background-image:
+    radial-gradient(circle at 100px 80px, rgba(253, 224, 71, 0.45) 1px, transparent 2px),
+    radial-gradient(circle at 260px 200px, rgba(255, 255, 255, 0.25) 1px, transparent 2px),
+    radial-gradient(circle at 40px 240px, rgba(251, 191, 36, 0.35) 1px, transparent 2px),
+    radial-gradient(circle at 300px 40px, rgba(249, 115, 22, 0.30) 1px, transparent 2px),
+    radial-gradient(circle at 180px 300px, rgba(253, 224, 71, 0.30) 1px, transparent 2px);
+  background-size: 340px 340px;
+  animation: sparksUpLarge 28s linear infinite;
+}
+
+@keyframes sparksUp {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -280px;
+  }
+}
+
+@keyframes sparksUpLarge {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -340px;
+  }
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -583,6 +647,14 @@ nav a:hover::after {
 
 .section-precos {
   background: linear-gradient(160deg, #111827 0%, #1f2937 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-precos .container,
+.section-precos > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .section-precos .section-title h2 {
@@ -2377,7 +2449,7 @@ body.no-scroll {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
