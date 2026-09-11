@@ -2,6 +2,8 @@
 
 Site institucional profissional para a **INOVE Mecânica Automotiva**.
 
+> 📄 Documentação técnica completa: [docs/DOCUMENTACAO.md](docs/DOCUMENTACAO.md)
+
 ## Estrutura do Projeto
 
 ```
