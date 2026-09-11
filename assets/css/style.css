@@ -1642,6 +1642,7 @@ nav a:hover::after {
 .map-address-card {
   background: var(--bg-light);
   border: 1px solid #e5e7eb;
+  border-top: 4px solid transparent;
   border-radius: var(--radius);
   padding: 22px;
   display: flex;
@@ -1655,7 +1656,7 @@ nav a:hover::after {
 .map-address-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
-  border-color: var(--secondary);
+  border-top-color: var(--secondary);
 }
 
 .map-address-icon {
