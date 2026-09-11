@@ -611,16 +611,17 @@ function renderAvaliacoes() {
 function renderHorarios() {
   const list = document.getElementById("horariosList");
   const dias = [
-    ["segunda", "Segunda-feira"],
-    ["terca", "Terça-feira"],
-    ["quarta", "Quarta-feira"],
-    ["quinta", "Quinta-feira"],
-    ["sexta", "Sexta-feira"],
-    ["sabado", "Sábado"],
-    ["domingo", "Domingo"]
+    ["segunda", "Segunda-feira", 1],
+    ["terca", "Terça-feira", 2],
+    ["quarta", "Quarta-feira", 3],
+    ["quinta", "Quinta-feira", 4],
+    ["sexta", "Sexta-feira", 5],
+    ["sabado", "Sábado", 6],
+    ["domingo", "Domingo", 0]
   ];
-  list.innerHTML = dias.map(([key, label]) => `
-    <li class="horarios-item">
+  const hoje = new Date().getDay();
+  list.innerHTML = dias.map(([key, label, jsDay]) => `
+    <li class="horarios-item${jsDay === hoje ? " hoje" : ""}">
       <span class="horarios-day">${label}</span>
       <span class="horarios-hour">${INOVE_CONFIG.horario[key]}</span>
     </li>
@@ -789,6 +790,7 @@ function setupScrollAnimations() {
     ".coverflow",
     ".reviews-grid > *",
     ".contato-grid > *",
+    ".contato-cards > *",
     ".map-wrapper",
     ".footer-content > *"
   ];
