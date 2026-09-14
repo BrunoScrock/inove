@@ -810,13 +810,19 @@ function setupMobileMenu() {
 
 function setupHeaderScroll() {
   const header = document.getElementById("header");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 40) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-  });
+  const hero = document.getElementById("inicio");
+
+  function aoRolar() {
+    const limiteGlass = hero
+      ? hero.offsetTop + hero.offsetHeight * 0.7
+      : window.innerHeight * 0.85;
+
+    header.classList.toggle("scrolled", window.scrollY > 40);
+    header.classList.toggle("glass", window.scrollY > limiteGlass);
+  }
+
+  aoRolar();
+  window.addEventListener("scroll", aoRolar, { passive: true });
 }
 
 /* ==========================================================================

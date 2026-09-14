@@ -17,6 +17,7 @@
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
   --shadow-hover: 0 20px 35px -8px rgba(0, 0, 0, 0.2);
   --radius: 14px;
+  --radius-sm: 8px;
 }
 
 * {
@@ -106,8 +107,9 @@ section {
    ========================================================================== */
 
 header {
-  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.97) 55%, rgba(17, 24, 39, 0.55) 100%);
-  backdrop-filter: blur(10px);
+  background: transparent;
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
   color: var(--white);
   position: fixed;
   top: 0;
@@ -115,13 +117,42 @@ header {
   width: 100%;
   height: 80px;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  transition: height 0.3s ease, box-shadow 0.3s ease;
+  transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Camada de vidro fosco que surge suavemente ao rolar para fora do hero */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.72) 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+}
+
+/* Estado encolhido (após rolar um pouco) */
 header.scrolled {
-  height: 68px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  height: 66px;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Estado glass — a camada de vidro fosco fica visível */
+header.glass::before {
+  opacity: 1;
+}
+
+header.glass {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+}
+
+header.glass.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+header.glass.scrolled::before {
+  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.97) 0%, rgba(17, 24, 39, 0.85) 100%);
 }
 
 .header-content {
@@ -137,6 +168,11 @@ header.scrolled {
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
 }
 
 .logo-img {
@@ -172,55 +208,67 @@ header.scrolled {
 nav ul {
   display: flex;
   list-style: none;
-  gap: 28px;
+  gap: 6px;
 }
 
 nav a {
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
   position: relative;
-  padding: 6px 0;
+  transition: color 0.25s, background 0.25s;
 }
 
 nav a::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 2px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 2px;
   background: var(--secondary);
+  border-radius: 2px;
   transition: width 0.3s ease;
 }
 
-nav a:hover {
-  color: var(--secondary);
+nav a:hover,
+nav a.active {
+  color: var(--white);
 }
 
-nav a:hover::after {
-  width: 100%;
+nav a:hover::after,
+nav a.active::after {
+  width: 60%;
 }
 
 .btn-header {
-  background-color: var(--whatsapp);
+  background: linear-gradient(135deg, var(--whatsapp), #128c7e);
   color: var(--white);
   padding: 10px 20px;
   border-radius: 50px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+  transition: transform 0.25s, box-shadow 0.25s;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
+.btn-header i,
+.btn-header svg {
+  width: 18px;
+  height: 18px;
+}
+
 .btn-header:hover {
-  background-color: var(--whatsapp-hover);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.45);
 }
 
 .mobile-menu-btn {
@@ -380,7 +428,7 @@ nav a:hover::after {
 }
 
 .btn-cta-hero {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-hover));
   color: var(--white);
   padding: 16px 30px;
   border-radius: 10px;
@@ -395,7 +443,7 @@ nav a:hover::after {
 }
 
 .btn-cta-hero:hover {
-  background-color: var(--secondary-hover);
+  background: linear-gradient(135deg, #ef4444, var(--secondary));
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(220, 38, 38, 0.45);
 }
@@ -622,7 +670,7 @@ nav a:hover::after {
 }
 
 .service-card .btn-card {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-hover));
   color: var(--white);
   font-weight: 600;
   font-size: 0.9rem;
@@ -636,7 +684,7 @@ nav a:hover::after {
 }
 
 .service-card .btn-card:hover {
-  background-color: var(--secondary-hover);
+  background: linear-gradient(135deg, #ef4444, var(--secondary));
   gap: 10px;
   transform: translateY(-2px);
 }
@@ -767,12 +815,12 @@ nav a:hover::after {
 }
 
 .section-precos .btn-cta-hero {
-  background-color: var(--whatsapp);
+  background: linear-gradient(135deg, var(--whatsapp), #128c7e);
   box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
 }
 
 .section-precos .btn-cta-hero:hover {
-  background-color: var(--whatsapp-hover);
+  background: linear-gradient(135deg, #4ade80, var(--whatsapp));
   box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
 }
 
@@ -975,7 +1023,7 @@ nav a:hover::after {
 }
 
 .btn-step-next {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-hover));
   color: var(--white);
   padding: 13px 24px;
   border: none;
@@ -991,7 +1039,7 @@ nav a:hover::after {
 }
 
 .btn-step-next:hover {
-  background-color: var(--secondary-hover);
+  background: linear-gradient(135deg, #ef4444, var(--secondary));
   transform: translateY(-2px);
 }
 
@@ -1017,7 +1065,7 @@ nav a:hover::after {
 }
 
 .btn-send-whatsapp {
-  background-color: var(--whatsapp);
+  background: linear-gradient(135deg, var(--whatsapp), #128c7e);
   color: var(--white);
   padding: 13px 24px;
   border: none;
@@ -1033,7 +1081,7 @@ nav a:hover::after {
 }
 
 .btn-send-whatsapp:hover {
-  background-color: var(--whatsapp-hover);
+  background: linear-gradient(135deg, #4ade80, var(--whatsapp));
   transform: translateY(-2px);
 }
 
@@ -1355,7 +1403,7 @@ nav a:hover::after {
   gap: 6px;
   padding: 9px 20px;
   border-radius: 9999px;
-  background-color: var(--whatsapp);
+  background: linear-gradient(135deg, var(--whatsapp), #128c7e);
   color: #ffffff;
   font-family: inherit;
   font-size: 0.78rem;
@@ -1365,11 +1413,11 @@ nav a:hover::after {
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .coverflow-cta:hover {
-  background-color: var(--whatsapp-hover);
+  background: linear-gradient(135deg, #4ade80, var(--whatsapp));
   transform: translateY(-2px);
 }
 
@@ -1677,7 +1725,7 @@ nav a:hover::after {
 }
 
 .btn-contato {
-  background-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: var(--white);
   padding: 11px 20px;
   border-radius: 8px;
@@ -1697,7 +1745,7 @@ nav a:hover::after {
 }
 
 .btn-contato:hover {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-hover));
   transform: translateY(-2px);
 }
 
@@ -1845,7 +1893,7 @@ nav a:hover::after {
 }
 
 .map-address-cta .btn-contato:hover {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-hover));
 }
 
 .map-address-card .copy-btn {
@@ -2008,7 +2056,7 @@ nav a:hover::after {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background-color: var(--whatsapp);
+  background: linear-gradient(135deg, var(--whatsapp), #128c7e);
   color: var(--white);
   width: 60px;
   height: 60px;
