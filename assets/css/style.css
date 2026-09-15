@@ -501,7 +501,7 @@ nav a.active::after {
   gap: 12px;
   box-shadow: 0 8px 25px rgba(220, 38, 38, 0.35);
   transition: all 0.3s;
-  border: 2px solid transparent;
+  border: 2px solid var(--secondary);
 }
 
 .btn-cta-hero:hover {
