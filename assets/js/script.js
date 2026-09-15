@@ -784,22 +784,15 @@ function setupMobileMenu() {
 
   menuBtn.addEventListener("click", () => {
     navMenu.classList.toggle("active");
-
-    const icon = menuBtn.querySelector("i");
-    const isOpen = navMenu.classList.contains("active");
-    icon.setAttribute("data-lucide", isOpen ? "x" : "menu");
-    menuBtn.setAttribute("aria-label", isOpen ? "Fechar Menu" : "Abrir Menu");
-    lucide.createIcons();
+    menuBtn.classList.toggle("active", navMenu.classList.contains("active"));
+    menuBtn.setAttribute("aria-expanded", navMenu.classList.contains("active"));
   });
 
   document.querySelectorAll(".nav-menu a, .nav-menu .btn-header").forEach(link => {
     link.addEventListener("click", () => {
       navMenu.classList.remove("active");
-      const icon = menuBtn.querySelector("i");
-      if (icon) {
-        icon.setAttribute("data-lucide", "menu");
-        lucide.createIcons();
-      }
+      menuBtn.classList.remove("active");
+      menuBtn.setAttribute("aria-expanded", "false");
     });
   });
 }
