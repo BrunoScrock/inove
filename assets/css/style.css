@@ -2388,8 +2388,18 @@ body.no-scroll {
   }
 
   .btn-header {
-    padding: 12px;
+    padding: 0;
     margin-left: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    justify-content: center;
+  }
+
+  .section-precos .btn-cta-hero i,
+  .section-precos .btn-cta-hero svg {
+    width: 26px;
+    height: 26px;
   }
 
   .logo-img {
