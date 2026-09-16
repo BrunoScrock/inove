@@ -386,29 +386,23 @@ nav a.active::after {
 /* Camada de fundo: fagulhas maiores e lentas */
 .sparks::before {
   background-image:
-    radial-gradient(circle at 30px 40px, rgba(255, 255, 255, 0.7) 3px, transparent 5px),
-    radial-gradient(circle at 160px 120px, rgba(220, 38, 38, 0.65) 4px, transparent 6px),
-    radial-gradient(circle at 90px 200px, rgba(255, 255, 255, 0.5) 2px, transparent 4px),
-    radial-gradient(circle at 240px 60px, rgba(220, 38, 38, 0.55) 3px, transparent 5px),
-    radial-gradient(circle at 200px 260px, rgba(255, 255, 255, 0.55) 3px, transparent 5px),
-    radial-gradient(circle at 120px 150px, rgba(220, 38, 38, 0.45) 2px, transparent 4px),
-    radial-gradient(circle at 280px 180px, rgba(255, 255, 255, 0.45) 2px, transparent 4px);
+    radial-gradient(circle at 30px 40px, rgba(255, 255, 255, 0.6) 2px, transparent 4px),
+    radial-gradient(circle at 160px 120px, rgba(220, 38, 38, 0.5) 3px, transparent 5px),
+    radial-gradient(circle at 90px 200px, rgba(255, 255, 255, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 240px 60px, rgba(220, 38, 38, 0.4) 2px, transparent 4px);
   background-size: 300px 300px;
-  animation: sparksUp 25s linear infinite;
+  animation: sparksUp 35s linear infinite;
 }
 
 /* Camada próxima: fagulhas menores e rápidas (profundidade) */
 .sparks::after {
   background-image:
-    radial-gradient(circle at 100px 80px, rgba(255, 255, 255, 0.85) 2px, transparent 4px),
-    radial-gradient(circle at 260px 200px, rgba(220, 38, 38, 0.75) 3px, transparent 5px),
-    radial-gradient(circle at 40px 240px, rgba(255, 255, 255, 0.7) 2px, transparent 4px),
-    radial-gradient(circle at 300px 40px, rgba(220, 38, 38, 0.7) 3px, transparent 5px),
-    radial-gradient(circle at 180px 300px, rgba(255, 255, 255, 0.65) 2px, transparent 4px),
-    radial-gradient(circle at 50px 100px, rgba(220, 38, 38, 0.6) 2px, transparent 3px),
-    radial-gradient(circle at 220px 280px, rgba(255, 255, 255, 0.6) 2px, transparent 3px);
+    radial-gradient(circle at 100px 80px, rgba(255, 255, 255, 0.7) 2px, transparent 3px),
+    radial-gradient(circle at 260px 200px, rgba(220, 38, 38, 0.6) 2px, transparent 4px),
+    radial-gradient(circle at 40px 240px, rgba(255, 255, 255, 0.5) 1px, transparent 3px),
+    radial-gradient(circle at 300px 40px, rgba(220, 38, 38, 0.5) 2px, transparent 3px);
   background-size: 350px 350px;
-  animation: sparksUpLarge 14s linear infinite;
+  animation: sparksUpLarge 20s linear infinite;
 }
 
 @keyframes sparksUp {
