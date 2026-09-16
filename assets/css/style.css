@@ -386,25 +386,29 @@ nav a.active::after {
 /* Camada de fundo: fagulhas maiores e lentas */
 .sparks::before {
   background-image:
-    radial-gradient(circle at 30px 40px, rgba(255, 255, 255, 0.30) 2px, transparent 3px),
-    radial-gradient(circle at 160px 120px, rgba(220, 38, 38, 0.28) 2px, transparent 3px),
-    radial-gradient(circle at 90px 200px, rgba(255, 255, 255, 0.18) 1px, transparent 2px),
-    radial-gradient(circle at 240px 60px, rgba(220, 38, 38, 0.22) 2px, transparent 3px),
-    radial-gradient(circle at 200px 260px, rgba(255, 255, 255, 0.20) 2px, transparent 3px);
-  background-size: 280px 280px;
-  animation: sparksUp 55s linear infinite;
+    radial-gradient(circle at 30px 40px, rgba(255, 255, 255, 0.55) 3px, transparent 4px),
+    radial-gradient(circle at 160px 120px, rgba(220, 38, 38, 0.50) 3px, transparent 4px),
+    radial-gradient(circle at 90px 200px, rgba(255, 255, 255, 0.35) 2px, transparent 3px),
+    radial-gradient(circle at 240px 60px, rgba(220, 38, 38, 0.40) 3px, transparent 4px),
+    radial-gradient(circle at 200px 260px, rgba(255, 255, 255, 0.40) 2px, transparent 3px),
+    radial-gradient(circle at 120px 150px, rgba(220, 38, 38, 0.30) 2px, transparent 3px),
+    radial-gradient(circle at 280px 180px, rgba(255, 255, 255, 0.30) 2px, transparent 3px);
+  background-size: 300px 300px;
+  animation: sparksUp 45s linear infinite;
 }
 
 /* Camada próxima: fagulhas menores e rápidas (profundidade) */
 .sparks::after {
   background-image:
-    radial-gradient(circle at 100px 80px, rgba(255, 255, 255, 0.50) 1px, transparent 2px),
-    radial-gradient(circle at 260px 200px, rgba(220, 38, 38, 0.40) 1px, transparent 2px),
-    radial-gradient(circle at 40px 240px, rgba(255, 255, 255, 0.35) 1px, transparent 2px),
-    radial-gradient(circle at 300px 40px, rgba(220, 38, 38, 0.35) 1px, transparent 2px),
-    radial-gradient(circle at 180px 300px, rgba(255, 255, 255, 0.35) 1px, transparent 2px);
-  background-size: 340px 340px;
-  animation: sparksUpLarge 28s linear infinite;
+    radial-gradient(circle at 100px 80px, rgba(255, 255, 255, 0.70) 2px, transparent 3px),
+    radial-gradient(circle at 260px 200px, rgba(220, 38, 38, 0.60) 2px, transparent 3px),
+    radial-gradient(circle at 40px 240px, rgba(255, 255, 255, 0.55) 2px, transparent 3px),
+    radial-gradient(circle at 300px 40px, rgba(220, 38, 38, 0.55) 2px, transparent 3px),
+    radial-gradient(circle at 180px 300px, rgba(255, 255, 255, 0.50) 2px, transparent 3px),
+    radial-gradient(circle at 50px 100px, rgba(220, 38, 38, 0.45) 1px, transparent 2px),
+    radial-gradient(circle at 220px 280px, rgba(255, 255, 255, 0.45) 1px, transparent 2px);
+  background-size: 350px 350px;
+  animation: sparksUpLarge 22s linear infinite;
 }
 
 @keyframes sparksUp {
@@ -441,25 +445,64 @@ nav a.active::after {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.3));
+  position: relative;
   animation: heroTitleIn 1s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s both;
 }
 
+.hero-text h1::after {
+  content: "MECÂNICA DE CONFIANÇA";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 @keyframes heroTitleIn {
-  from {
+  0% {
     opacity: 0;
-    filter: blur(14px) drop-shadow(0 0 30px rgba(220, 38, 38, 0.3));
-    transform: translateY(14px);
+    filter: blur(20px);
+    transform: translateY(20px) scale(0.95);
   }
-  to {
+  60% {
+    filter: blur(0);
+  }
+  100% {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 0 30px rgba(220, 38, 38, 0.3));
+    filter: blur(0) drop-shadow(0 0 40px rgba(220, 38, 38, 0.4));
     transform: none;
   }
 }
 
 .hero-text h1 span {
   display: block;
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroSpanIn 1s cubic-bezier(0.2, 0.6, 0.2, 1) 0.5s both;
+}
+
+@keyframes heroSpanIn {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0) drop-shadow(0 0 25px rgba(220, 38, 38, 0.5));
+    transform: none;
+  }
 }
 
 .hero-text p {
