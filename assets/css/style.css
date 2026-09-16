@@ -436,24 +436,11 @@ nav a.active::after {
   margin-bottom: 20px;
   letter-spacing: -0.5px;
   color: var(--white);
-  animation: heroTitleIn 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s both,
-             textGlow 3s ease-in-out infinite;
-}
-
-@keyframes textGlow {
-  0%, 100% {
-    text-shadow:
-      0 0 20px rgba(220, 38, 38, 0.4),
-      0 0 40px rgba(220, 38, 38, 0.2),
-      0 0 60px rgba(220, 38, 38, 0.1);
-  }
-  50% {
-    text-shadow:
-      0 0 30px rgba(220, 38, 38, 0.6),
-      0 0 60px rgba(220, 38, 38, 0.35),
-      0 0 90px rgba(220, 38, 38, 0.2),
-      0 0 120px rgba(220, 38, 38, 0.1);
-  }
+  text-shadow:
+    0 0 20px rgba(220, 38, 38, 0.4),
+    0 0 40px rgba(220, 38, 38, 0.2),
+    0 0 60px rgba(220, 38, 38, 0.1);
+  animation: heroTitleIn 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s both;
 }
 
 @keyframes heroTitleIn {
