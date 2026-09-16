@@ -394,7 +394,7 @@ nav a.active::after {
     radial-gradient(circle at 120px 150px, rgba(220, 38, 38, 0.30) 2px, transparent 3px),
     radial-gradient(circle at 280px 180px, rgba(255, 255, 255, 0.30) 2px, transparent 3px);
   background-size: 300px 300px;
-  animation: sparksUp 45s linear infinite;
+  animation: sparksUp 30s linear infinite;
 }
 
 /* Camada próxima: fagulhas menores e rápidas (profundidade) */
@@ -408,7 +408,7 @@ nav a.active::after {
     radial-gradient(circle at 50px 100px, rgba(220, 38, 38, 0.45) 1px, transparent 2px),
     radial-gradient(circle at 220px 280px, rgba(255, 255, 255, 0.45) 1px, transparent 2px);
   background-size: 350px 350px;
-  animation: sparksUpLarge 22s linear infinite;
+  animation: sparksUpLarge 16s linear infinite;
 }
 
 @keyframes sparksUp {
@@ -441,66 +441,49 @@ nav a.active::after {
   line-height: 1.15;
   margin-bottom: 20px;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 40%, #dc2626 70%, #ef4444 100%);
+  background: linear-gradient(135deg, #ffffff, #dc2626, #ffffff, #ef4444);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  position: relative;
-  animation: heroTitleIn 1s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s both;
+  animation: heroTitleIn 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s both,
+             gradientShift 6s ease-in-out infinite;
 }
 
-.hero-text h1::after {
-  content: "MECÂNICA DE CONFIANÇA";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out 1.5s infinite;
-  pointer-events: none;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 @keyframes heroTitleIn {
   0% {
     opacity: 0;
-    filter: blur(20px);
-    transform: translateY(20px) scale(0.95);
-  }
-  60% {
-    filter: blur(0);
+    transform: translateY(24px);
   }
   100% {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 0 40px rgba(220, 38, 38, 0.4));
     transform: none;
   }
 }
 
 .hero-text h1 span {
   display: block;
-  background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+  background: linear-gradient(135deg, #dc2626, #f87171, #dc2626);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: heroSpanIn 1s cubic-bezier(0.2, 0.6, 0.2, 1) 0.5s both;
+  animation: heroSpanIn 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) 0.4s both,
+             gradientShift 6s ease-in-out infinite;
 }
 
 @keyframes heroSpanIn {
   0% {
     opacity: 0;
-    filter: blur(12px);
     transform: translateY(16px);
   }
   100% {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 0 25px rgba(220, 38, 38, 0.5));
     transform: none;
   }
 }
