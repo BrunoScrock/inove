@@ -825,6 +825,7 @@ function setupHeaderScroll() {
 function setupScrollAnimations() {
   const seletores = [
     ".section-title",
+    ".section-eyebrow",
     ".pillars-grid > *",
     ".services-grid > *",
     ".prices-grid > *",
@@ -843,9 +844,13 @@ function setupScrollAnimations() {
   const alvos = document.querySelectorAll(seletores.join(","));
   if (!alvos.length || !("IntersectionObserver" in window)) return;
 
+  const revealClasses = ["reveal", "reveal-left", "reveal-right", "reveal-scale", "fade-up"];
+
   alvos.forEach((el) => {
-    el.classList.add("reveal");
-    // Atraso escalonado suave entre os itens da mesma linha
+    const alreadyHasReveal = revealClasses.some((c) => el.classList.contains(c));
+    if (!alreadyHasReveal) {
+      el.classList.add("reveal");
+    }
     const indice = Array.prototype.indexOf.call(el.parentElement.children, el);
     el.style.transitionDelay = `${(indice % 6) * 0.08}s`;
   });
@@ -856,8 +861,6 @@ function setupScrollAnimations() {
         if (entrada.isIntersecting) {
           entrada.target.classList.add("visible");
           observador.unobserve(entrada.target);
-          // Após o fim da entrada escalonada, zera o atraso para não
-          // prejudicar os hovers (instantâneo).
           const atraso = parseFloat(entrada.target.style.transitionDelay || 0);
           setTimeout(() => {
             entrada.target.style.transitionDelay = "0s";

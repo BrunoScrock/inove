@@ -29,8 +29,8 @@
 }
 
 body {
-  background: var(--white);
-  color: var(--text-dark);
+  background: #0a0a0f;
+  color: var(--white);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -54,20 +54,74 @@ section {
 }
 
 /* ==========================================================================
-   ANIMAÇÕES
+   ANIMAÇÕES (scroll reveal)
    ========================================================================== */
 
 .reveal,
-.fade-up {
+.fade-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
+              transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.reveal,
+.fade-up {
+  transform: translateY(30px);
+}
+
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal-scale {
+  transform: scale(0.95);
 }
 
 .reveal.visible,
-.fade-up.visible {
+.fade-up.visible,
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+/* Section eyebrow (label acima do titulo) */
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--secondary);
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 20px;
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/* Section backgrounds alternados */
+.section-dark {
+  background: #0f1117;
+}
+
+.section-darker {
+  background: #080a0f;
+}
+
+.section-glass {
+  background: rgba(15, 17, 23, 0.6);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 /* Animação de entrada do hero (ao carregar a página) */
@@ -581,7 +635,7 @@ nav a.active::after {
 .section-title h2 {
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 12px;
   letter-spacing: -0.5px;
 }
@@ -591,7 +645,7 @@ nav a.active::after {
 }
 
 .section-title p {
-  color: var(--text-muted);
+  color: #9ca3af;
   font-size: 1.1rem;
   max-width: 640px;
   margin: 0 auto;
@@ -602,7 +656,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-diferenciais {
-  background-color: var(--bg-light);
+  background-color: #0f1117;
 }
 
 .pillars-grid {
@@ -612,17 +666,21 @@ nav a.active::after {
 }
 
 .pillar-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius);
   padding: 30px;
-  box-shadow: var(--shadow);
-  border: 1px solid #e5e7eb;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-  border-top: 4px solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  border-top: 3px solid transparent;
 }
 
 .pillar-card:hover {
   transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(220, 38, 38, 0.3);
+  border-top-color: var(--secondary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
   box-shadow: var(--shadow-hover);
   border-top-color: var(--secondary);
 }
@@ -630,24 +688,25 @@ nav a.active::after {
 .pillar-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  background: rgba(220, 38, 38, 0.12);
   color: var(--secondary);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .pillar-card h3 {
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 12px;
-  color: var(--primary);
+  color: var(--white);
 }
 
 .pillar-card p {
-  color: var(--text-muted);
+  color: #9ca3af;
   font-size: 0.95rem;
 }
 
@@ -656,7 +715,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-servicos {
-  background-color: var(--white);
+  background-color: #0a0a0f;
 }
 
 .services-grid {
@@ -666,10 +725,10 @@ nav a.active::after {
 }
 
 .service-card {
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius);
   padding: 28px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -677,38 +736,40 @@ nav a.active::after {
 
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-  border-color: transparent;
-  background: var(--white);
+  border-color: rgba(220, 38, 38, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .service-icon {
   width: 52px;
   height: 52px;
-  background: var(--primary);
-  color: var(--accent);
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--secondary);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 18px;
-  transition: background 0.3s;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  transition: background 0.3s, color 0.3s;
 }
 
 .service-card:hover .service-icon {
   background: var(--secondary);
   color: var(--white);
+  border-color: var(--secondary);
 }
 
 .service-card h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 8px;
 }
 
 .service-card p {
-  color: var(--text-muted);
+  color: #9ca3af;
   font-size: 0.9rem;
   margin-bottom: 18px;
   flex-grow: 1;
@@ -879,7 +940,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-pre-diagnostico {
-  background-color: var(--bg-light);
+  background-color: #0a0a0f;
 }
 
 .pre-diagnostico-wrapper {
@@ -889,10 +950,9 @@ nav a.active::after {
 
 .pre-step {
   display: none;
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
 }
 
@@ -911,7 +971,8 @@ nav a.active::after {
   align-items: center;
   gap: 14px;
   padding: 20px 28px;
-  background: linear-gradient(135deg, var(--primary), #1f2937);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(220, 38, 38, 0.05));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--white);
 }
 
@@ -944,7 +1005,7 @@ nav a.active::after {
   display: block;
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--text-dark);
+  color: #d1d5db;
   margin-bottom: 6px;
 }
 
@@ -952,12 +1013,12 @@ nav a.active::after {
 .form-group select {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   font-size: 1rem;
   font-family: 'Inter', sans-serif;
-  background: var(--white);
-  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -965,7 +1026,12 @@ nav a.active::after {
 .form-group select:focus {
   outline: none;
   border-color: var(--secondary);
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.form-group select option {
+  background: #1a1d27;
+  color: var(--white);
 }
 
 .service-options {
@@ -980,13 +1046,14 @@ nav a.active::after {
   cursor: pointer;
   display: block;
   padding: 13px 16px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   font-weight: 500;
   font-size: 0.92rem;
   text-align: center;
   transition: all 0.25s;
   user-select: none;
+  color: #d1d5db;
 }
 
 .service-option input {
@@ -998,12 +1065,12 @@ nav a.active::after {
 }
 
 .service-option:hover {
-  border-color: var(--secondary);
+  border-color: rgba(220, 38, 38, 0.4);
 }
 
 .service-option:has(input:checked) {
   border-color: var(--secondary);
-  background: #fef2f2;
+  background: rgba(220, 38, 38, 0.12);
   color: var(--secondary);
   font-weight: 600;
 }
@@ -1025,8 +1092,8 @@ nav a.active::after {
 }
 
 .urgency-card {
-  background: var(--white);
-  border: 2px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
   padding: 22px;
   display: flex;
@@ -1040,19 +1107,18 @@ nav a.active::after {
 .urgency-card i {
   width: 28px;
   height: 28px;
-  color: var(--text-muted);
+  color: #9ca3af;
   transition: color 0.3s;
 }
 
 .urgency-card strong {
   font-size: 0.95rem;
-  color: var(--text-dark);
+  color: #d1d5db;
 }
 
 .urgency-option input:checked + .urgency-card {
   border-color: var(--secondary);
-  background: #fef2f2;
-  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.1);
+  background: rgba(220, 38, 38, 0.12);
 }
 
 .urgency-option input:checked + .urgency-card i {
@@ -1062,7 +1128,7 @@ nav a.active::after {
 .step-question {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 18px;
 }
 
@@ -1095,9 +1161,9 @@ nav a.active::after {
 
 .btn-step-back {
   background-color: transparent;
-  color: var(--text-muted);
+  color: #9ca3af;
   padding: 13px 24px;
-  border: 2px solid #d1d5db;
+  border: 2px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.95rem;
@@ -1110,8 +1176,8 @@ nav a.active::after {
 }
 
 .btn-step-back:hover {
-  border-color: var(--text-dark);
-  color: var(--text-dark);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--white);
 }
 
 .btn-send-whatsapp {
@@ -1140,7 +1206,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-sobre {
-  background-color: var(--white);
+  background-color: #0f1117;
 }
 
 .sobre-grid {
@@ -1153,7 +1219,7 @@ nav a.active::after {
 .sobre-image {
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-hover);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .sobre-image img {
@@ -1171,7 +1237,7 @@ nav a.active::after {
 .sobre-text h2 {
   font-size: 2.2rem;
   font-weight: 800;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 20px;
   letter-spacing: -0.5px;
 }
@@ -1183,13 +1249,13 @@ nav a.active::after {
 .sobre-highlight {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 16px;
   line-height: 1.5;
 }
 
 .sobre-text p {
-  color: var(--text-muted);
+  color: #9ca3af;
   margin-bottom: 14px;
 }
 
@@ -1204,22 +1270,20 @@ nav a.active::after {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--bg-light);
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 10px;
   padding: 13px 16px;
   font-weight: 500;
   font-size: 0.92rem;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transform: translateY(-3px);
+  color: #d1d5db;
 }
 
 .sobre-feature:hover {
-  border-color: var(--secondary);
-  background: #fef2f2;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  transform: translateY(-6px);
+  border-color: rgba(220, 38, 38, 0.3);
+  background: rgba(220, 38, 38, 0.08);
+  transform: translateY(-3px);
 }
 
 .sobre-feature i {
@@ -1232,7 +1296,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-galeria {
-  background-color: var(--bg-light);
+  background-color: #0a0a0f;
   padding: 90px 0;
 }
 
@@ -1630,8 +1694,8 @@ nav a.active::after {
 }
 
 .review-card {
-  background: var(--bg-light);
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 28px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -1641,7 +1705,7 @@ nav a.active::after {
 
 .review-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 .review-stars {
@@ -1658,7 +1722,7 @@ nav a.active::after {
 }
 
 .review-text {
-  color: var(--text-dark);
+  color: #d1d5db;
   font-size: 0.98rem;
   font-style: italic;
   margin-bottom: 18px;
@@ -1687,20 +1751,20 @@ nav a.active::after {
 .review-author strong {
   display: block;
   font-size: 0.95rem;
-  color: var(--primary);
+  color: var(--white);
 }
 
 .review-author span {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #9ca3af;
 }
 
 .review-placeholder-note {
   text-align: center;
   margin-top: 30px;
   font-size: 0.9rem;
-  color: var(--text-muted);
-  background: #fef3c7;
+  color: #d1d5db;
+  background: rgba(245, 158, 11, 0.1);
   border: 1px dashed #f59e0b;
   border-radius: 10px;
   padding: 14px 18px;
@@ -1711,7 +1775,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-contato {
-  background-color: var(--bg-light);
+  background-color: #0a0a0f;
 }
 
 .contato-grid {
@@ -1728,32 +1792,33 @@ nav a.active::after {
 }
 
 .contato-card {
-  background: var(--white);
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
   padding: 28px 22px;
   text-align: center;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   display: flex;
   flex-direction: column;
 }
 
 .contato-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+  border-color: rgba(220, 38, 38, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .contato-card-icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  background: rgba(220, 38, 38, 0.12);
   color: var(--secondary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .contato-card-icon svg {
@@ -1764,18 +1829,18 @@ nav a.active::after {
 .contato-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 6px;
 }
 
 .contato-card p {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #9ca3af;
   margin-bottom: 16px;
 }
 
 .btn-contato {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-hover));
   color: var(--white);
   padding: 11px 20px;
   border-radius: 8px;
@@ -1800,16 +1865,15 @@ nav a.active::after {
 }
 
 .contato-info {
-  background: var(--white);
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
   padding: 28px;
-  box-shadow: var(--shadow);
 }
 
 .horarios-card h3 {
   font-size: 1.2rem;
-  color: var(--primary);
+  color: var(--white);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1829,8 +1893,9 @@ nav a.active::after {
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px dashed #e5e7eb;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
   font-size: 0.95rem;
+  color: #d1d5db;
 }
 
 .horarios-item:last-child {
@@ -1838,7 +1903,7 @@ nav a.active::after {
 }
 
 .horarios-item.hoje {
-  background: #dcfce7;
+  background: rgba(34, 197, 94, 0.1);
   border-radius: 8px;
   padding-left: 12px;
   padding-right: 12px;
@@ -1855,7 +1920,7 @@ nav a.active::after {
 
 .horarios-day {
   font-weight: 500;
-  color: var(--text-dark);
+  color: #d1d5db;
   text-transform: capitalize;
 }
 
@@ -1869,7 +1934,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-localizacao {
-  background-color: var(--white);
+  background-color: #0f1117;
   padding-bottom: 90px;
 }
 
@@ -1887,9 +1952,9 @@ nav a.active::after {
 }
 
 .map-address-card {
-  background: var(--bg-light);
-  border: 1px solid #e5e7eb;
-  border-top: 4px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
   padding: 22px;
   display: flex;
@@ -1902,20 +1967,21 @@ nav a.active::after {
 
 .map-address-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
   border-top-color: var(--secondary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .map-address-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  background: rgba(220, 38, 38, 0.12);
   color: var(--secondary);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .map-address-icon svg {
@@ -1926,12 +1992,12 @@ nav a.active::after {
 .map-address-text h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 4px;
 }
 
 .map-address-text p {
-  color: var(--text-muted);
+  color: #9ca3af;
   font-size: 0.92rem;
   line-height: 1.5;
 }
@@ -1939,7 +2005,6 @@ nav a.active::after {
 .map-address-cta .btn-contato {
   margin-top: auto;
   width: 100%;
-  background-color: var(--accent);
 }
 
 .map-address-cta .btn-contato:hover {
@@ -1949,18 +2014,25 @@ nav a.active::after {
 .map-address-card .copy-btn {
   margin-top: auto;
   width: 100%;
-  background-color: var(--accent);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #d1d5db;
   border: none;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: all 0.25s;
 }
 
 .map-address-card .copy-btn:hover {
   background-color: var(--secondary);
+  color: var(--white);
 }
 
 .map-address-card .copy-btn.copied {
   background-color: var(--whatsapp);
+  color: var(--white);
 }
 
 .coverage-map {
@@ -1968,8 +2040,7 @@ nav a.active::after {
   margin: 0 auto;
   border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 12px 30px -12px rgba(17, 24, 39, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .coverage-map iframe {
@@ -1983,14 +2054,14 @@ nav a.active::after {
   position: absolute;
   right: 10px;
   top: 10px;
-  background: var(--white);
-  color: var(--primary);
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--white);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.25s, color 0.25s;
+  backdrop-filter: blur(8px);
+  transition: background 0.25s;
 }
 
 .coverage-link:hover {
@@ -2003,9 +2074,10 @@ nav a.active::after {
    ========================================================================== */
 
 .footer {
-  background-color: #0d1117;
+  background-color: #06070b;
   color: #9ca3af;
   padding: 60px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .footer-content {
@@ -2404,7 +2476,7 @@ body.no-scroll {
 
 @media (max-width: 768px) {
   body {
-    background: var(--white);
+    background: #0a0a0f;
   }
 
   header {
