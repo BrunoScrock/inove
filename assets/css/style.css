@@ -24,12 +24,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
-  background: #0a0a0f;
+  background: #0f172a;
   color: var(--white);
   line-height: 1.6;
   overflow-x: hidden;
@@ -99,26 +99,32 @@ section {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: var(--secondary);
-  margin-bottom: 10px;
-  padding: 4px 12px;
+  margin-bottom: 12px;
+  padding: 5px 14px;
   border: 1px solid rgba(220, 38, 38, 0.3);
   border-radius: 20px;
   background: rgba(220, 38, 38, 0.08);
+  animation: eyebrowPulse 3s ease-in-out infinite;
+}
+
+@keyframes eyebrowPulse {
+  0%, 100% { border-color: rgba(220, 38, 38, 0.3); }
+  50% { border-color: rgba(220, 38, 38, 0.6); }
 }
 
 /* Section backgrounds alternados */
 .section-dark {
-  background: #0f1117;
+  background: #1e293b;
 }
 
 .section-darker {
-  background: #080a0f;
+  background: #0f172a;
 }
 
 .section-glass {
-  background: rgba(15, 17, 23, 0.6);
+  background: rgba(30, 41, 59, 0.6);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -172,7 +178,7 @@ header::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.72) 100%);
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.78) 100%);
   opacity: 0;
   pointer-events: none;
   z-index: -1;
@@ -201,7 +207,7 @@ header.glass.scrolled {
 }
 
 header.glass.scrolled::before {
-  background: linear-gradient(to bottom, rgba(31, 41, 55, 0.78) 0%, rgba(31, 41, 55, 0.5) 100%);
+  background: linear-gradient(to bottom, rgba(30, 41, 59, 0.82) 0%, rgba(30, 41, 59, 0.55) 100%);
 }
 
 .header-content {
@@ -240,10 +246,12 @@ header.glass.scrolled::before {
 }
 
 .logo-name {
-  font-weight: 900;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
   font-size: 1.35rem;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   color: var(--white);
+  text-transform: uppercase;
 }
 
 .logo-sub {
@@ -345,7 +353,7 @@ nav a.active::after {
 }
 
 .mobile-menu-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .mobile-menu-btn.active .bar:nth-child(1) {
@@ -484,11 +492,13 @@ nav a.active::after {
 }
 
 .hero-text h1 {
+  font-family: 'Oswald', sans-serif;
   font-size: 3.2rem;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.15;
   margin-bottom: 20px;
-  letter-spacing: -0.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   color: var(--white);
   text-shadow:
     0 0 20px rgba(220, 38, 38, 0.4),
@@ -630,18 +640,41 @@ nav a.active::after {
 .section-title {
   text-align: center;
   margin-bottom: 50px;
+  position: relative;
 }
 
 .section-title h2 {
+  font-family: 'Oswald', sans-serif;
   font-size: 2.4rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title h2::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent));
+  border-radius: 2px;
+  margin: 10px auto 0;
+  transition: width 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.section-title.visible h2::after {
+  width: 60px;
 }
 
 .section-title h2 span {
-  color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-title p {
@@ -656,7 +689,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-diferenciais {
-  background-color: #0f1117;
+  background-color: #1e293b;
 }
 
 .pillars-grid {
@@ -699,10 +732,13 @@ nav a.active::after {
 }
 
 .pillar-card h3 {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 12px;
   color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .pillar-card p {
@@ -715,7 +751,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-servicos {
-  background-color: #0a0a0f;
+  background-color: #0f172a;
 }
 
 .services-grid {
@@ -762,10 +798,13 @@ nav a.active::after {
 }
 
 .service-card h3 {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .service-card p {
@@ -800,7 +839,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-precos {
-  background: linear-gradient(160deg, #111827 0%, #1f2937 100%);
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
   position: relative;
   overflow: hidden;
 }
@@ -858,9 +897,11 @@ nav a.active::after {
 
 .price-card-header h3 {
   color: var(--white);
+  font-family: 'Oswald', sans-serif;
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .price-list {
@@ -940,7 +981,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-pre-diagnostico {
-  background-color: #0a0a0f;
+  background-color: #1e293b;
 }
 
 .pre-diagnostico-wrapper {
@@ -989,8 +1030,11 @@ nav a.active::after {
 }
 
 .pre-step-header h3 {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .pre-step-body {
@@ -1016,7 +1060,7 @@ nav a.active::after {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   font-size: 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   background: rgba(255, 255, 255, 0.05);
   color: var(--white);
   transition: border-color 0.3s, box-shadow 0.3s;
@@ -1146,7 +1190,7 @@ nav a.active::after {
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1167,7 +1211,7 @@ nav a.active::after {
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1188,7 +1232,7 @@ nav a.active::after {
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1206,7 +1250,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-sobre {
-  background-color: #0f1117;
+  background-color: #1e293b;
 }
 
 .sobre-grid {
@@ -1235,11 +1279,13 @@ nav a.active::after {
 }
 
 .sobre-text h2 {
+  font-family: 'Oswald', sans-serif;
   font-size: 2.2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
   margin-bottom: 20px;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .sobre-text h2 span {
@@ -1296,7 +1342,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-galeria {
-  background-color: #0a0a0f;
+  background-color: #0f172a;
   padding: 90px 0;
 }
 
@@ -1609,7 +1655,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-avaliacoes {
-  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f2937 100%);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
   position: relative;
   overflow: hidden;
 }
@@ -1775,7 +1821,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-contato {
-  background-color: #0a0a0f;
+  background-color: #0f172a;
 }
 
 .contato-grid {
@@ -1827,10 +1873,13 @@ nav a.active::after {
 }
 
 .contato-card h3 {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .contato-card p {
@@ -1872,12 +1921,15 @@ nav a.active::after {
 }
 
 .horarios-card h3 {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.2rem;
   color: var(--white);
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .horarios-card h3 i {
@@ -1934,7 +1986,7 @@ nav a.active::after {
    ========================================================================== */
 
 .section-localizacao {
-  background-color: #0f1117;
+  background-color: #1e293b;
   padding-bottom: 90px;
 }
 
@@ -1990,10 +2042,13 @@ nav a.active::after {
 }
 
 .map-address-text h3 {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .map-address-text p {
@@ -2018,7 +2073,7 @@ nav a.active::after {
   color: #d1d5db;
   border: none;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   padding: 8px 14px;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -2074,10 +2129,10 @@ nav a.active::after {
    ========================================================================== */
 
 .footer {
-  background-color: #06070b;
+  background-color: #0b1120;
   color: #9ca3af;
   padding: 60px 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .footer-content {
@@ -2106,11 +2161,13 @@ nav a.active::after {
 }
 
 .footer-brand h3 {
+  font-family: 'Oswald', sans-serif;
   color: var(--white);
   font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 2px;
   line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .footer-brand p {
@@ -2428,19 +2485,24 @@ body.no-scroll {
     top: 100%;
     left: 0;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(17, 24, 39, 0.96) 0%, rgba(17, 24, 39, 0.88) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 10px 0 20px;
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    max-height: calc(100vh - 80px);
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.92) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 8px 0 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    max-height: calc(100vh - 60px);
     overflow-y: auto;
   }
 
   .nav-menu.active {
     display: block;
-    animation: fadeIn 0.3s ease;
+    animation: menuSlideDown 0.3s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  @keyframes menuSlideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .nav-menu ul {
@@ -2450,9 +2512,17 @@ body.no-scroll {
 
   .nav-menu ul li a {
     display: block;
-    padding: 15px 24px;
-    font-size: 1.05rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-menu ul li a:hover,
+  .nav-menu ul li a.active {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--white);
   }
 
   .mobile-menu-btn {
@@ -2476,11 +2546,11 @@ body.no-scroll {
 
 @media (max-width: 768px) {
   body {
-    background: #0a0a0f;
+    background: #0f172a;
   }
 
   header {
-    height: 70px;
+    height: 60px;
   }
 
   section {
@@ -2498,9 +2568,9 @@ body.no-scroll {
   .btn-header {
     padding: 0;
     margin-left: auto;
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     justify-content: center;
   }
 
@@ -2511,8 +2581,10 @@ body.no-scroll {
   }
 
   .logo-img {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    padding: 3px;
   }
 
   .logo-name {
@@ -2520,7 +2592,11 @@ body.no-scroll {
   }
 
   .logo-sub {
-    font-size: 0.58rem;
+    font-size: 0.55rem;
+  }
+
+  .logo {
+    gap: 8px;
   }
 
   .hero {
